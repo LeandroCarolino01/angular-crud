@@ -43,6 +43,27 @@
           </label>
         </div>
       </div>
+
+      <div class="form-group">
+
+        <div class="form-control">
+          <label class="checkbox-inline">
+            <input type="checkbox" value="isActive" name="gender" [(ngModel)]="isActive">
+            Is Active
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="department">
+            Department
+          </label>
+          <select id="department" name="department" [(ngModel)]="department" class="form-control">
+           <option *ngFor="let dept of departments" [value]="dept.id">
+             {{dept.name}}
+           </option>
+          </select>
+      </div>
     </div>
     <div class="panel-footer">
       <button type="submit" class="btn btn-primary">Save</button>
