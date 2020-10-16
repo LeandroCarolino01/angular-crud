@@ -20,6 +20,7 @@ export class CreateEmployeeComponent implements OnInit {
   phoneNumber: number;
   isActive:boolean;
   department: string = '3';
+  dateOfBirth: string;
   constructor() { }
 
   ngOnInit() {
