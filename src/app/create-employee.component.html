@@ -17,11 +17,11 @@
 
       <div class="form-group" [class.has-error]="email.invalid && email.touched">
         <label for="email" class="control-label">Email</label>
-        <input required [email]="employee.email!==''" id="email"  [(ngModel)]="employee.email" name="email" #email="ngModel" type="text" class="form-control">
+        <input required pattern="^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" id="email"  [(ngModel)]="employee.email" name="email" #email="ngModel" type="text" class="form-control">
         <span class="help-block" *ngIf="email.errors?.required && email.touched">
           email is required
        </span>
-       <span class="help-block" *ngIf="email.errors?.email && email.touched">
+       <span class="help-block" *ngIf="email.errors?.pattern && email.touched">
         email is invalid
      </span>
       </div>
