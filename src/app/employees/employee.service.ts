@@ -11,7 +11,7 @@ export class EmployeeService {
       contactPreference: 'Email',
       phoneNumber: 26262626262,
       dateOfBirth: new Date('11/20/1978'),
-      department: 'hr',
+      department: '3',
       isActive: true,
       photoPath: 'assets/images/person1.jpg',
       password: '',
@@ -24,7 +24,7 @@ export class EmployeeService {
       contactPreference: 'Email',
       phoneNumber: 26262626262,
       dateOfBirth: new Date('11/20/1978'),
-      department: 'hr',
+      department: '2',
       isActive: true,
       photoPath: 'assets/images/person2.jpg',
       password: '',
@@ -37,7 +37,7 @@ export class EmployeeService {
       contactPreference: 'Email',
       phoneNumber: 26262626262,
       dateOfBirth: new Date('11/20/1978'),
-      department: 'hr',
+      department: '1',
       isActive: true,
       photoPath: 'assets/images/person3.jpg',
       password: '',
@@ -47,6 +47,10 @@ export class EmployeeService {
 
   getEmployees(): Employee[] {
     return this.listEmployees;
+  }
+
+  save(employee: Employee) {
+    this.listEmployees.push(employee);
   }
 
 }
