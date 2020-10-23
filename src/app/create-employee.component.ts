@@ -23,7 +23,9 @@ export class CreateEmployeeComponent implements OnInit {
     dateOfBirth: null,
     department: 'select',
     isActive: null,
-    photoPath: null
+    photoPath: null,
+    password:null,
+    confirmPassword:null
   }
   departments: Department[] = [
     {id: 1, name: 'Help Desk'},
@@ -38,6 +40,8 @@ export class CreateEmployeeComponent implements OnInit {
   isActive:boolean;
   department: string = '3';
   photoPath:string;
+  password:string;
+  confirmPassword:string;
   constructor() {
     this.datePickersConfig = Object.assign({},
       {
