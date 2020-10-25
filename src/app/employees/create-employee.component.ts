@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Department } from './models/department.model';
+import { Department } from '../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { Employee } from './models/employee.model';
-import { EmployeeService } from './employees/employee.service';
+import { Employee } from '../models/employee.model';
+import { EmployeeService } from '../employees/employee.service';
 import { Router } from '@angular/router';
 
 

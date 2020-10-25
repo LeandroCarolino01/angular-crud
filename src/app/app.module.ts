@@ -5,12 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListEmployeesComponent } from './employees/list-employees.component';
-import { CreateEmployeeComponent } from './create-employee.component';
+import { CreateEmployeeComponent } from './employees/create-employee.component';
+
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectRequiredValidatorDirective } from './shared/select-required-validator.directive';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { EmployeeService } from './employees/employee.service';
+import { DisplayEmployeeComponent } from './employees/display-employee.component';
+
+
+
 
 
 
@@ -20,10 +25,11 @@ import { EmployeeService } from './employees/employee.service';
     ListEmployeesComponent,
     CreateEmployeeComponent,
     SelectRequiredValidatorDirective,
-    ConfirmEqualValidatorDirective
+    ConfirmEqualValidatorDirective,
+    DisplayEmployeeComponent
   ],
   imports: [
-    BrowserModule,
+BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
