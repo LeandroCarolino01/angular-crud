@@ -1,6 +1,5 @@
-
-<div *ngFor="let employee of employees">
-
+<div *ngFor="let employee of employees" class="pointerCursor">
+  <div (click)="onClick(employee.id)">
     <app-display-employee [employee]="employee" #childComponent></app-display-employee>
-
+  </div>
 </div>

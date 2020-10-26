@@ -14,6 +14,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { EmployeeService } from './employees/employee.service';
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
 import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
+import { EmployeeDetailsComponent } from './employees/employee-details.component';
 
 
 
@@ -27,7 +28,8 @@ import { CreateEmployeeCanDeactivateGuardService } from './employees/create-empl
     CreateEmployeeComponent,
     SelectRequiredValidatorDirective,
     ConfirmEqualValidatorDirective,
-    DisplayEmployeeComponent
+    DisplayEmployeeComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     BrowserModule,
