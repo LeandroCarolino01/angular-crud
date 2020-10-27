@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ["./display-employee.component.css"],
 })
 export class DisplayEmployeeComponent implements OnInit {
-  private selectedEmployeeId: number;
+  selectedEmployeeId: number;
 
   @Input() employee: Employee;
 
