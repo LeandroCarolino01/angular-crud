@@ -31,19 +31,22 @@ export class ListEmployeesComponent implements OnInit {
   constructor(private _employeeService: EmployeeService, private _router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.employees = this._employeeService.getEmployees();
+    this._employeeService.getEmployees().subscribe((empList) => {
+      this.employees = empList;
+      if (this._route.snapshot.queryParamMap.has('searchTerm')) {
+        this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
+      } else {
+        this.filteredEmployees = this.employees;
+      }
+
+    })
     this.filteredEmployees = this.employees;
-    if(this._route.snapshot.queryParamMap.has('searchTerm')){
-      this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
-    } else {
-      this.filteredEmployees = this.employees;
-    }
 
   }
 
   onClick(employeeId: number) {
     this._router.navigate(['/employees', employeeId], {
-      queryParams: { 'searchTerm': this.searchTerm, 'testParam': 'testValue  '}
+      queryParams: { 'searchTerm': this.searchTerm, 'testParam': 'testValue  ' }
     })
   }
 }
