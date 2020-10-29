@@ -2,7 +2,5 @@
   <input type="text" class="form-control" placeholder="Search By Name" style="width: 300px;" [(ngModel)]="searchTerm"/>
 </div>
 <div *ngFor="let employee of filteredEmployees" class="pointerCursor">
-  <div (click)="onClick(employee.id)">
-    <app-display-employee [employee]="employee" #childComponent></app-display-employee>
-  </div>
+    <app-display-employee [employee]="employee" [searchTerm]="searchTerm"></app-display-employee>
 </div>
