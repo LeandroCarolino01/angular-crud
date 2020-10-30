@@ -1,7 +1,7 @@
-<form #employeeForm="ngForm" (ngSubmit)="saveEmployee()">
+<form id="employeeForm" name="employeeForm" #employeeForm="ngForm" (ngSubmit)="saveEmployee()">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">Create Employee</h3>
+      <h3 class="panel-title">{{panelTitle}}</h3>
     </div>
 
     <div class="panel-body">
@@ -28,7 +28,7 @@
       <div class="form-group" [class.has-error]="email.invalid">
         <label for="email" class="control-label">Email</label>
         <input
-          [required]="contactPreference.value === 'email'"
+          [required]="contactPreference.value === 'Email'"
           pattern="^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
           id="email"
           [(ngModel)]="employee.email"
@@ -36,6 +36,7 @@
           #email="ngModel"
           type="text"
           class="form-control"
+          value="Email"
         />
         <span class="help-block" *ngIf="email.errors?.required">
           email is required
@@ -49,12 +50,13 @@
         <label for="phoneNumber" class="control-label">Phone Number</label>
         <input
           id="phoneNumber"
-          [required]="contactPreference.value === 'phone'"
+          [required]="contactPreference.value === 'Phone'"
           #phoneNumber="ngModel"
           [(ngModel)]="employee.phoneNumber"
           name="phoneNumber"
           type="text"
           class="form-control"
+          value="Phone"
         />
         <span class="help-block" *ngIf="phoneNumber.errors?.required">
           Phone Number is required
@@ -207,6 +209,7 @@
           type="button"
           (click)="togglePhotoPreview()"
           class="btn btn-primary"
+          *ngIf="employee.photoPath !== '' && employee.photoPath !== null"
         >
           {{ previewPhoto ? "Hide " : "Show " }} Preview
         </button>
@@ -217,7 +220,7 @@
           [src]="employee.photoPath"
           height="200"
           width="200"
-          *ngIf="previewPhoto"
+          *ngIf="previewPhoto && employee.photoPath !== '' && employee.photoPath !== null"
         />
       </div>
     </div>

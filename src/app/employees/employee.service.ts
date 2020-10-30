@@ -11,7 +11,8 @@ export class EmployeeService {
       id: 1,
       name: 'Anna',
       gender: 'female',
-      contactPreference: 'Email',
+      email: 'anna@gmail.com',
+      contactPreference: 'Phone',
       phoneNumber: 26262626262,
       dateOfBirth: new Date('11/20/1978'),
       department: '1',
@@ -24,7 +25,8 @@ export class EmployeeService {
       id: 2,
       name: 'maria',
       gender: 'female',
-      contactPreference: 'Email',
+      email: 'anna@gmail.com',
+      contactPreference: 'Phone',
       phoneNumber: 26262626262,
       dateOfBirth: new Date('11/20/1978'),
       department: '2',
@@ -37,7 +39,8 @@ export class EmployeeService {
       id: 3,
       name: 'mark',
       gender: 'female',
-      contactPreference: 'Email',
+      email: 'anna@gmail.com',
+      contactPreference: 'Phone',
       phoneNumber: 26262626262,
       dateOfBirth: new Date('11/20/1978'),
       department: '3',
@@ -59,7 +62,16 @@ export class EmployeeService {
   }
 
   save(employee: Employee) {
-    this.listEmployees.push(employee);
+    if(employee.id === null){
+      const maxid = this.listEmployees.reduce(function(e1,e2) {
+        return (e1.id > e2.id) ? e1 : e2;
+      }).id;
+      employee.id =maxid + 1;
+      this.listEmployees.push(employee);
+    } else {
+      const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id);
+      this.listEmployees[foundIndex] = employee;
+    }
   }
 
 }
