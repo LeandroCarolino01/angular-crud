@@ -74,4 +74,11 @@ export class EmployeeService {
     }
   }
 
+  deleteEmployee(id: number){
+    const i = this.listEmployees.findIndex(e => e.id === id);
+    if (i !== -1){
+      this.listEmployees.splice(i, 1);
+    }
+  }
+
 }

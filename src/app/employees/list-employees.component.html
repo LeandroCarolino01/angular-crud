@@ -2,5 +2,5 @@
   <input type="text" class="form-control" placeholder="Search By Name" style="width: 300px;" [(ngModel)]="searchTerm"/>
 </div>
 <div *ngFor="let employee of filteredEmployees" class="pointerCursor">
-    <app-display-employee [employee]="employee" [searchTerm]="searchTerm"></app-display-employee>
+    <app-display-employee [employee]="employee" [searchTerm]="searchTerm" (notifyDelete)="onDeleteNotification($event)"></app-display-employee>
 </div>
