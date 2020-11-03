@@ -1,0 +1,34 @@
+{
+  "employees": [
+    {
+      "id":1,
+      "name": "Mare",
+      "contactPreference": "Email",
+      "email": "mark@gmail.com",
+      "dateOfBirth":"1988/10/25",
+      "department": "3",
+      "isActive":true,
+      "phtoPath": "assets/images/person1.jpg"
+    },
+    {
+      "id":2,
+      "name": "Anna",
+      "contactPreference": "Email",
+      "email": "mark@gmail.com",
+      "dateOfBirth":"1988/10/25",
+      "department": "3",
+      "isActive":true,
+      "phtoPath": "assets/images/person1.jpg"
+    },
+    {
+      "id":3,
+      "name": "Hou",
+      "contactPreference": "Email",
+      "email": "mark@gmail.com",
+      "dateOfBirth":"1988/10/25",
+      "department": "3",
+      "isActive":true,
+      "phtoPath": "assets/images/person1.jpg"
+    }
+  ]
+}
