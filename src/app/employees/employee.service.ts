@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { of } from 'rxjs';
-import {  delay } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { delay } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class EmployeeService {
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) { }
   private listEmployees: Employee[] = [
     {
       id: 1,
@@ -21,7 +22,7 @@ export class EmployeeService {
       isActive: true,
       photoPath: 'assets/images/person1.jpg',
       password: '',
-      confirmPassword:''
+      confirmPassword: ''
     },
     {
       id: 2,
@@ -35,7 +36,7 @@ export class EmployeeService {
       isActive: true,
       photoPath: 'assets/images/person2.jpg',
       password: '',
-      confirmPassword:''
+      confirmPassword: ''
     },
     {
       id: 3,
@@ -49,12 +50,24 @@ export class EmployeeService {
       isActive: true,
       photoPath: 'assets/images/person3.jpg',
       password: '',
-      confirmPassword:''
+      confirmPassword: ''
     }
   ];
 
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>('http://localhost:3000/employees');
+    return this.http.get<Employee[]>('http://localhost:3000/employees')
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    if (errorResponse.error instanceof ErrorEvent) {
+      console.log('Client side error', errorResponse.error.message);
+    } else {
+      console.log('Server side error: ', errorResponse)
+    }
+    return throwError('this is a problem with the service!')
   }
 
   getEmployee(id: number): Employee {
@@ -62,11 +75,11 @@ export class EmployeeService {
   }
 
   save(employee: Employee) {
-    if(employee.id === null){
-      const maxid = this.listEmployees.reduce(function(e1,e2) {
+    if (employee.id === null) {
+      const maxid = this.listEmployees.reduce(function (e1, e2) {
         return (e1.id > e2.id) ? e1 : e2;
       }).id;
-      employee.id =maxid + 1;
+      employee.id = maxid + 1;
       this.listEmployees.push(employee);
     } else {
       const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id);
@@ -74,9 +87,9 @@ export class EmployeeService {
     }
   }
 
-  deleteEmployee(id: number){
+  deleteEmployee(id: number) {
     const i = this.listEmployees.findIndex(e => e.id === id);
-    if (i !== -1){
+    if (i !== -1) {
       this.listEmployees.splice(i, 1);
     }
   }
