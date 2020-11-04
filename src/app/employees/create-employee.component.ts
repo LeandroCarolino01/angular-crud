@@ -70,7 +70,10 @@ export class CreateEmployeeComponent implements OnInit {
     }
     else {
       this.panelTitle = 'Edit employee';
-      this.employee = Object.assign({}, this._employeeService.getEmployee(id));
+      this._employeeService.getEmployee(id).subscribe(
+        (employee) => this.employee = employee,
+        (err: any) => console.log(err)
+      )
     }
   }
 

@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class EmployeeService {
   constructor(private http: HttpClient) { }
+  baseUrl = 'http://localhost:3000/employees';
   private listEmployees: Employee[] = [
     {
       id: 1,
@@ -55,7 +56,7 @@ export class EmployeeService {
   ];
 
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>('http://localhost:3000/employees')
+    return this.http.get<Employee[]>(this.baseUrl)
       .pipe(
         catchError(this.handleError)
       )
@@ -70,25 +71,35 @@ export class EmployeeService {
     return throwError('this is a problem with the service!')
   }
 
-  getEmployee(id: number): Employee {
-    return this.listEmployees.find(e => e.id === id)
+  getEmployee(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.baseUrl}/${id}`)
+      .pipe(catchError(this.handleError))
+
   }
 
-  save(employee: Employee): Observable<Employee> {
-    if (employee.id === null) {
-     return this.http.post<Employee>('http://localhost:3000/employees', employee, {
-        headers: new HttpHeaders({
-          'content-Type': 'application/json'
-        })
-
+  addEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.baseUrl, employee, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
       })
+
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+
+  }
+
+  updateEmployee(employee: Employee): Observable<void> {
+
+    return this.http.put<void>(`${this.baseUrl}/${employee.id}`, employee, {
+      headers: new HttpHeaders({
+        'content-Type': 'application/json'
+      })
+    })
       .pipe(
         catchError(this.handleError)
       )
-    } else {
-      const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id);
-      this.listEmployees[foundIndex] = employee;
-    }
   }
 
   deleteEmployee(id: number) {
