@@ -8,7 +8,7 @@
       "dateOfBirth":"1988/10/25",
       "department": "3",
       "isActive":true,
-      "phtoPath": "assets/images/person1.jpg"
+      "photoPath": "assets/images/person1.jpg"
     },
     {
       "id":2,
@@ -18,7 +18,7 @@
       "dateOfBirth":"1988/10/25",
       "department": "3",
       "isActive":true,
-      "phtoPath": "assets/images/person1.jpg"
+      "photoPath": "assets/images/person2.jpg"
     },
     {
       "id":3,
@@ -28,7 +28,7 @@
       "dateOfBirth":"1988/10/25",
       "department": "3",
       "isActive":true,
-      "phtoPath": "assets/images/person1.jpg"
+      "photoPath": "assets/images/person3.jpg"
     }
   ]
 }

@@ -3,9 +3,11 @@ import { Employee } from '../models/employee.model';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import {  delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class EmployeeService {
+  constructor(private http: HttpClient){}
   private listEmployees: Employee[] = [
     {
       id: 1,
@@ -52,9 +54,7 @@ export class EmployeeService {
   ];
 
   getEmployees(): Observable<Employee[]> {
-    return of(this.listEmployees).pipe(
-      delay( 3000 )
-  );
+    return this.http.get<Employee[]>('http://localhost:3000/employees');
   }
 
   getEmployee(id: number): Employee {
