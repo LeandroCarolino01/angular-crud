@@ -3,7 +3,7 @@ import { Employee } from '../models/employee.model';
 import { Observable, throwError } from 'rxjs';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -74,13 +74,17 @@ export class EmployeeService {
     return this.listEmployees.find(e => e.id === id)
   }
 
-  save(employee: Employee) {
+  save(employee: Employee): Observable<Employee> {
     if (employee.id === null) {
-      const maxid = this.listEmployees.reduce(function (e1, e2) {
-        return (e1.id > e2.id) ? e1 : e2;
-      }).id;
-      employee.id = maxid + 1;
-      this.listEmployees.push(employee);
+     return this.http.post<Employee>('http://localhost:3000/employees', employee, {
+        headers: new HttpHeaders({
+          'content-Type': 'application/json'
+        })
+
+      })
+      .pipe(
+        catchError(this.handleError)
+      )
     } else {
       const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id);
       this.listEmployees[foundIndex] = employee;
