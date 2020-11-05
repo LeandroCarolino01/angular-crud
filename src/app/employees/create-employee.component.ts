@@ -79,16 +79,24 @@ export class CreateEmployeeComponent implements OnInit {
 
 
   saveEmployee() {
-    this._employeeService.save(this.employee).subscribe(
-      (data: Employee) => {
-        console.log(data);
-        this.createEmployeeForm.reset();
-        this._router.navigate(['list']);
-      },
-      (error: any) => {
-        console.log(error)
-      }
-    );
+    if (this.employee.id == null) {
+      this._employeeService.addEmployee(this.employee).subscribe(
+        (data: Employee) => {
+          console.log(data);
+          this.createEmployeeForm.reset();
+          this._router.navigate(['list']);
+        },
+        (error: any) => console.log(error)
+      );
+    } else {
+        this._employeeService.updateEmployee(this.employee).subscribe(
+          () => {
+            this.createEmployeeForm.reset();
+            this._router.navigate(['list']);
+          },
+          (error: any) => console.log(error)
+        );
+    }
   }
 
   togglePhotoPreview() {
