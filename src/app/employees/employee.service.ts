@@ -8,52 +8,10 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class EmployeeService {
-  constructor(private http: HttpClient) { }
   baseUrl = 'http://localhost:3000/employees';
-  private listEmployees: Employee[] = [
-    {
-      id: 1,
-      name: 'Anna',
-      gender: 'female',
-      email: 'anna@gmail.com',
-      contactPreference: 'Phone',
-      phoneNumber: 26262626262,
-      dateOfBirth: new Date('11/20/1978'),
-      department: '1',
-      isActive: true,
-      photoPath: 'assets/images/person1.jpg',
-      password: '',
-      confirmPassword: ''
-    },
-    {
-      id: 2,
-      name: 'maria',
-      gender: 'female',
-      email: 'anna@gmail.com',
-      contactPreference: 'Phone',
-      phoneNumber: 26262626262,
-      dateOfBirth: new Date('11/20/1978'),
-      department: '2',
-      isActive: true,
-      photoPath: 'assets/images/person2.jpg',
-      password: '',
-      confirmPassword: ''
-    },
-    {
-      id: 3,
-      name: 'mark',
-      gender: 'female',
-      email: 'anna@gmail.com',
-      contactPreference: 'Phone',
-      phoneNumber: 26262626262,
-      dateOfBirth: new Date('11/20/1978'),
-      department: '3',
-      isActive: true,
-      photoPath: 'assets/images/person3.jpg',
-      password: '',
-      confirmPassword: ''
-    }
-  ];
+
+  constructor(private http: HttpClient) { }
+
 
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.baseUrl)
@@ -101,11 +59,9 @@ export class EmployeeService {
       )
   }
 
-  deleteEmployee(id: number) {
-    const i = this.listEmployees.findIndex(e => e.id === id);
-    if (i !== -1) {
-      this.listEmployees.splice(i, 1);
-    }
+  deleteEmployee(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`)
+      .pipe(catchError(this.handleError))
   }
 
 }
