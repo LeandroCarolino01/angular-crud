@@ -1,6 +1,6 @@
-import { DialogRef } from '@angular/cdk/dialog';
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   templateUrl: './emp-add-edit.component.html',
   styleUrls: ['./emp-add-edit.component.scss']
 })
-export class EmpAddEditComponent {
+export class EmpAddEditComponent implements OnInit {
   empForm: FormGroup;
   education: string[] = [
     'Matric',
@@ -18,7 +18,7 @@ export class EmpAddEditComponent {
     'Post Graduate'
   ]
 
-  constructor(private _fb: FormBuilder, private _empService: EmployeeService, private _dialogRef:DialogRef<EmpAddEditComponent>) {
+  constructor(private _fb: FormBuilder, private _empService: EmployeeService, private _dialogRef:MatDialogRef<EmpAddEditComponent>, @Inject(MAT_DIALOG_DATA) private data: any) {
     this.empForm = this._fb.group({
       firstName: '',
       lastName: '',
@@ -31,6 +31,9 @@ export class EmpAddEditComponent {
       package: ''
     })
   }
+  ngOnInit(): void {
+    this.empForm.patchValue(this.data);
+  }
 
   onFormSubmit(){
     // if (this.empForm.valid){
@@ -41,7 +44,7 @@ export class EmpAddEditComponent {
       this._empService.addEmployee(this.empForm.value).subscribe({
         next: (val: any) => {
             alert('employee added')
-            this._dialogRef.close();
+            this._dialogRef.close(true);
         },
         error:  (err: any) => {
           console.log(err);
