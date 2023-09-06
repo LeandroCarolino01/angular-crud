@@ -18,7 +18,7 @@
   },
   "employees": [
     {
-      "firstName": "Leandro",
+      "firstName": "Leandros",
       "lastName": "Dos Santos",
       "email": "carolino.leandro@gmail.com",
       "dob": "2023-09-21T22:00:00.000Z",
@@ -28,18 +28,6 @@
       "experience": 5,
       "package": 12,
       "id": 1
-    },
-    {
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john@gmail.com",
-      "dob": "2023-09-07T22:00:00.000Z",
-      "gender": "male",
-      "education": "Diploma",
-      "company": "hh",
-      "experience": 5,
-      "package": 12,
-      "id": 2
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CoreService } from 'src/app/core/core.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class EmpAddEditComponent implements OnInit {
     'Post Graduate'
   ]
 
-  constructor(private _fb: FormBuilder, private _empService: EmployeeService, private _dialogRef:MatDialogRef<EmpAddEditComponent>, @Inject(MAT_DIALOG_DATA) private data: any) {
+  constructor(private _fb: FormBuilder, private _empService: EmployeeService, private _dialogRef:MatDialogRef<EmpAddEditComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private _coreService: CoreService) {
     this.empForm = this._fb.group({
       firstName: '',
       lastName: '',
@@ -41,15 +42,28 @@ export class EmpAddEditComponent implements OnInit {
     // }
     // this is a way to test the data coming in
     if (this.empForm.valid){
-      this._empService.addEmployee(this.empForm.value).subscribe({
-        next: (val: any) => {
-            alert('employee added')
+      if(this.data) {
+        this._empService.updateEmployee(this.data.id, this.empForm.value).subscribe({
+          next: (val: any) => {
+            this._coreService.openSnackBar('Employee updated')
+
+              this._dialogRef.close(true);
+          },
+          error:  (err: any) => {
+            console.log(err);
+          }
+        })
+      } else {
+        this._empService.addEmployee(this.empForm.value).subscribe({
+          next: (val: any) => {
+            this._coreService.openSnackBar('Employee added', 'done')
             this._dialogRef.close(true);
-        },
-        error:  (err: any) => {
-          console.log(err);
-        }
-      })
+          },
+          error:  (err: any) => {
+            console.log(err);
+          }
+        })
+      }
     }
   }
 }
